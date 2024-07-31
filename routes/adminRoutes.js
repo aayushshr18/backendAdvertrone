@@ -617,8 +617,8 @@ router.post("/addAmtTeamlead", async (req, res) => {
 
 router.patch("/addAmtTeamlead", async (req, res) => {
   try {
-    const { id, amt } = req.query;
-    const tl = await TeamLeader.findById(id);
+    const { email, amt } = req.query;
+    const tl = await TeamLeader.findOne(email);
     tl.totalBalance += parseInt(amt);
     tl.currBalance += parseInt(amt);
     await tl.save();
