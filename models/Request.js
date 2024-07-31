@@ -6,7 +6,7 @@ const reqSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum:["Pending","Paid","Rejected"],
+    enum:["Pending","Approved","Rejected"],
     default: "Pending",
   },
   email: {

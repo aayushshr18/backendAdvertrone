@@ -124,6 +124,11 @@ router.patch("/request", async (req, res) => {
     const tl = await Req.findById(id);
     tl.status=status;
     await tl.save();
+    if(status==="Approved"){
+        const t= await TeamLeader.findById(tl.userId);
+        t.currBalance-=tl.amt;
+        await t.save();
+    }
 
     res.status(200).json({
       success: true,
