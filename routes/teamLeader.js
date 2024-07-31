@@ -328,8 +328,8 @@ router.get("/dashboard", async (req, res) => {
       data: {
         totalTeam: teamLeader.agent_id.length,
         totalLeads: tleads,
-        amount: amt,
-        weekly: amt,
+        currBalance:teamLeader.currBalance,
+        totalBalance:teamLeader.totalBalance,
       },
       message: "Dashboard statistics fetched successfully",
     });
