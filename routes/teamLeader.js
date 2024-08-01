@@ -76,7 +76,7 @@ router.post("/withdraw", async (req, res) => {
     if (amt > tl.currBalance) {
       return res.status(404).json({ error: "Insufficient fund" });
     }
-    const t = await Req.findOne({ userId:id, status: "pending" });
+    const t = await Req.findOne({ userId:id, status: "Pending" });
     if (t) {
       return res
         .status(404)
