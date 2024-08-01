@@ -104,7 +104,7 @@ router.post("/withdraw", async (req, res) => {
 
 router.get("/requests", async (req, res) => {
   try {
-    const tl = await Req.find();
+    const tl = await Req.find().sort({ createdAt: -1 });
     res.status(200).json({
       success: true,
       req: tl,
@@ -143,10 +143,11 @@ router.patch("/request", async (req, res) => {
   }
 });
 
+
 router.get("/myrequests", async (req, res) => {
   try {
     const {id}=req.query;
-    const tl = await Req.find({userId:id});
+    const tl = await Req.find({userId:id}).sort({ createdAt: -1 });
     res.status(200).json({
       success: true,
       req: tl,
