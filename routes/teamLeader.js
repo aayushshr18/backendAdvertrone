@@ -143,6 +143,24 @@ router.patch("/request", async (req, res) => {
   }
 });
 
+router.get("/myrequests", async (req, res) => {
+  try {
+    const {id}=req.query;
+    const tl = await Req.find({userId:id});
+    res.status(200).json({
+      success: true,
+      req: tl,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to generate user or token",
+    });
+  }
+});
+
+
 // Get all Agents route
 router.get("/agents", async (req, res) => {
   try {
@@ -309,13 +327,11 @@ router.get("/dashboard", async (req, res) => {
     const teamLeader = await TeamLeader.findById(id);
 
     let tleads = 0;
-    let amt = 0;
     const members = await Promise.all(
       teamLeader.agent_id.map(async (id) => {
         const user = await Employee.findOne({ agent_code: id }).select(
           "-password"
         );
-        amt = amt + (user?.balance || 0);
         const leads = await Leads.find({ employee_id: user?._id });
         tleads = tleads + (leads?.length || 0);
         return user;
