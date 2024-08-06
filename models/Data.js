@@ -16,6 +16,10 @@ const dataSchema = new mongoose.Schema({
   },
   userId:{
     type:String
+  },
+  createdAt:{
+    type:Date,
+    default:Date.now()
   }
 });
 
