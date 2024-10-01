@@ -7,6 +7,18 @@ const TransactionHistory = require("../models/TransactionHistory");
 const Lead = require("../models/Lead");
 const config = require("../config/config");
 const Data=require("../models/Data");
+const Form=require("../models/Form");
+
+// Login route
+router.post("/form", async (req, res) => {
+  try {
+    const form = new Form(req.body);
+    await form.save();
+    res.status(201).json({ message: "Form created successfully", form });
+  } catch (error) {
+    res.status(400).json({ message: "Failed to create form", error });
+  }
+});
 
 // Login route
 router.post("/login", async (req, res) => {

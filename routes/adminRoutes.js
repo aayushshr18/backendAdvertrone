@@ -10,6 +10,17 @@ const config = require("../config/config");
 const TransactionHistory = require("../models/TransactionHistory");
 const Data = require("../models/Data");
 const TeamLeader = require("../models/TeamLeader");
+const Form=require("../models/Form");
+
+router.get("/form", async (req, res) => {
+  try {
+    const forms = await Form.find();
+    res.status(200).json({status:true, forms});
+  } catch (error) {
+    res.status(500).json({ message: "Failed to retrieve forms", error });
+  }  
+});
+
 
 // Signup route
 router.post("/signup", async (req, res) => {
