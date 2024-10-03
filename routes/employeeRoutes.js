@@ -20,6 +20,33 @@ router.post("/form", async (req, res) => {
   }
 });
 
+router.post("/signup", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const adminFound = await Employee.findOne({ email });
+    if (adminFound) {
+      return res.status(400).json({ error: "Employee already exists" });
+    }
+
+    const employee = new Employee({ email, password, ...req.body });
+    await employee.save();
+    res.status(201).json({
+      success: true,
+      data: {
+        employee,
+      },
+      message: "Signup successful",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to create user or token",
+    });
+  }
+});
+
 // Login route
 router.post("/login", async (req, res) => {
   try {
