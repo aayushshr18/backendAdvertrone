@@ -40,6 +40,18 @@ const formSchema = new mongoose.Schema({
       ["", "", "", "", "", "", ""], // Hours
     ],
   },
+
+  payDetails: {
+    payCode: { type: String, default: "" },      // Pay code
+    regHrs: { type: String, default: "" },       // Regular hours
+    otHrs: { type: String, default: "" },        // Overtime hours
+    dHrs: { type: String, default: "" },         // Double-time hours
+    billRate: { type: String, default: "" },     // Billing rate
+    otBillRate: { type: String, default: "" },   // Overtime billing rate
+    dBillRate: { type: String, default: "" },    // Double-time billing rate
+    total: { type: String, default: "" }         // Total payment
+  },
+  
   createdDate: { type: Date, default: Date.now }
 
 });
